@@ -157,6 +157,7 @@ class ClassBalancedLoss(nn.Module):
             base_loss = self.loss_func(logits, target)
             weights = self.weights.index_select(0, target)
             balanced_loss = (weights * base_loss).mean()
+
             return balanced_loss
         else:
             raise ValueError(f"Invalid reduction method: {self.loss_func.reduction}. Please use 'none'.")
